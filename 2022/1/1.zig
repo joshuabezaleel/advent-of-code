@@ -3,7 +3,7 @@ const data = @embedFile("./input2.txt");
 const ArrayList = std.ArrayList;
 
 pub fn main() !void {
-    var file = try std.fs.cwd().openFile("input.txt", .{});
+    var file = try std.fs.cwd().openFile("input2.txt", .{});
     defer file.close();
 
     var buf_reader = std.io.bufferedReader(file.reader());
@@ -20,9 +20,11 @@ pub fn main() !void {
             sum = 0;
             continue;
         } else {
-            std.debug.print("{s} {} {}\n", .{line, sum, max});
             sum = sum + try std.fmt.parseInt(usize, line, 10);
         }
+    }
+    if (sum > max) {
+        max = sum;
     }
     std.debug.print("{} \n", .{max});
 }
